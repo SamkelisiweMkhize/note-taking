@@ -13,12 +13,12 @@
         
         <span>{{ task.taskName }}</span>
         
-        <button >Edit</button>
-        <button >Delete</button>
-        <div *ngIf="isEditing && editIndex === i">
-          <label for=""></label>
-          <input type="text" [(ngModel)]="editTaskName">
-          <button (click)="onSubmit(taskForm)">Save</button>
+    <button (click)="toggleEdit(i)">Edit</button>
+    <button (click)="onDelete(i)">Delete</button>
+    <div *ngIf="isEditing && editIndex === i">
+      <input type="text" [(ngModel)]="editTaskName">
+      <button (click)="onSubmit(taskForm)">Save</button>
+          
         </div>
       </li>
     </div>
