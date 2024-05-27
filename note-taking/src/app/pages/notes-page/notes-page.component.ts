@@ -40,5 +40,14 @@ export class NotesPageComponent implements OnInit {
     this.isEditing = true;
     this.editIndex = index;
     this.editTaskName = this.taskArray[index].taskName;
+
+ 
+}
+
+   //delete value by specific index point from the taskArray
+   onDelete(index: number) {
+    this.taskArray.splice(index, 1);
+   
   }
+
 }
