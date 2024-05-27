@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-notes-page',
   templateUrl: './notes-page.component.html',
-  styleUrl: './notes-page.component.css'
+  styleUrl: './notes-page.component.css',
 })
 export class NotesPageComponent implements OnInit {
   taskArray = [{ taskName: 'Brush teeth' }];
@@ -13,9 +13,28 @@ export class NotesPageComponent implements OnInit {
   editTaskName = '';
 
   constructor() {}
+
+  // load Notes from local storage on initialization
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.loadTasksFromLocalStorage();
   }
+
+  // load tasks from local storage function
+  loadTasksFromLocalStorage() {
+    // saved tasks = get 'tasks' from localstorage.getItem('tasks')
+    const savedTasks = localStorage.getItem('tasks');
+    //if there are saved tasks in the local storage, fetch them and PARSE the data (Make it readable for user)
+    if (savedTasks) {
+      this.taskArray = JSON.parse(savedTasks);
+    }
+  }
+
+    // save tasks to local storage, STRINGIFY the data, making it readable by the computer
+    saveTasksToLocalStorage() {
+      localStorage.setItem('tasks', JSON.stringify(this.taskArray));
+    }
+
+  
   onSubmit(form: NgForm) {
     // if task is in editing mode at a certain index point, and the value is not empty
     if (this.isEditing && this.editIndex !== null) {
@@ -35,19 +54,19 @@ export class NotesPageComponent implements OnInit {
     }
   }
 
+  
+
   //Toggle the editing mode of a specific task by index point
   toggleEdit(index: number) {
     this.isEditing = true;
     this.editIndex = index;
     this.editTaskName = this.taskArray[index].taskName;
-
- 
-}
-
-   //delete value by specific index point from the taskArray
-   onDelete(index: number) {
-    this.taskArray.splice(index, 1);
-   
   }
 
+  
+
+  //delete value by specific index point from the taskArray
+  onDelete(index: number) {
+    this.taskArray.splice(index, 1);
+  }
 }
