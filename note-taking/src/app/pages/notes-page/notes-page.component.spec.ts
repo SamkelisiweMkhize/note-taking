@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NatesPageComponent } from './nates-page.component';
+import { NotesPageComponent } from './notes-page.component';
 
-describe('NatesPageComponent', () => {
-  let component: NatesPageComponent;
-  let fixture: ComponentFixture<NatesPageComponent>;
+describe('NotesPageComponent', () => {
+  let component: NotesPageComponent;
+  let fixture: ComponentFixture<NotesPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NatesPageComponent]
+      declarations: [NotesPageComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(NatesPageComponent);
+    fixture = TestBed.createComponent(NotesPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
