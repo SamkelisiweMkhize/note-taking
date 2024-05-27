@@ -1,1 +1,26 @@
-<p>notes-page works!</p>
+<div class="header">
+    <h2>Notes List</h2>
+    </div>
+    
+    
+      <div class="display">
+      <form #taskForm="ngForm" (submit)="onSubmit(taskForm)">
+        <input type="text" name="task" ngModel required>
+        <button type="submit">Add Note</button>
+      </form>
+    
+      <li *ngFor="let task of taskArray; let i = index">
+        
+        <span>{{ task.taskName }}</span>
+        
+        <button (click)="toggleEdit(i)">Edit</button>
+        <button (click)="onDelete(i)">Delete</button>
+        <div *ngIf="isEditing && editIndex === i">
+          <label for=""></label>
+          <input type="text" [(ngModel)]="editTaskName">
+          <button (click)="onSubmit(taskForm)">Save</button>
+        </div>
+      </li>
+    </div>
+    
+    
