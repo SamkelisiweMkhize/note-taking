@@ -16,12 +16,22 @@ export class NotesPageComponent implements OnInit {
 
   // load Notes from local storage on initialization
   ngOnInit(): void {
+
+    throw new Error('Method not implemented.');
+    this.loadTasksFromLocalStorage(); 
+  }
+
+  //load tasks from local storage function
+  loadTasksFromLocalStorage() {
+    //saved tasks = get 'tasks' from localstorage.getItem('tasks')
+
     this.loadTasksFromLocalStorage();
   }
 
   // load tasks from local storage function
   loadTasksFromLocalStorage() {
     // saved tasks = get 'tasks' from localstorage.getItem('tasks')
+
     const savedTasks = localStorage.getItem('tasks');
     //if there are saved tasks in the local storage, fetch them and PARSE the data (Make it readable for user)
     if (savedTasks) {
@@ -29,12 +39,19 @@ export class NotesPageComponent implements OnInit {
     }
   }
 
+
+  // save tasks to local storage, STRINGIFY the data, making it readable by the computer
+  saveTasksToLocalStorage() {
+    localStorage.setItem('tasks', JSON.stringify(this.taskArray));
+  }
+
+
     // save tasks to local storage, STRINGIFY the data, making it readable by the computer
     saveTasksToLocalStorage() {
       localStorage.setItem('tasks', JSON.stringify(this.taskArray));
     }
 
-  
+
   onSubmit(form: NgForm) {
     // if task is in editing mode at a certain index point, and the value is not empty
     if (this.isEditing && this.editIndex !== null) {
@@ -52,7 +69,13 @@ export class NotesPageComponent implements OnInit {
         taskName: form.controls['task'].value,
       });
     }
+
     this.saveTasksToLocalStorage();
+
+   //save to local storage on submit
+    this.saveTasksToLocalStorage();
+    //reset the form
+
     form.reset();
   }
   
@@ -64,6 +87,17 @@ export class NotesPageComponent implements OnInit {
     this.isEditing = true;
     this.editIndex = index;
     this.editTaskName = this.taskArray[index].taskName;
+
+
+ 
+}
+
+   //delete value by specific index point from the taskArray
+   onDelete(index: number) {
+    this.taskArray.splice(index, 1);
+    this.saveTasksToLocalStorage();
+
+
   }
 
   
