@@ -52,7 +52,10 @@ export class NotesPageComponent implements OnInit {
         taskName: form.controls['task'].value,
       });
     }
+    this.saveTasksToLocalStorage();
+    form.reset();
   }
+  
 
   
 
@@ -68,5 +71,6 @@ export class NotesPageComponent implements OnInit {
   //delete value by specific index point from the taskArray
   onDelete(index: number) {
     this.taskArray.splice(index, 1);
+    this.saveTasksToLocalStorage();
   }
 }
