@@ -15,7 +15,24 @@ export class NotesPageComponent implements OnInit {
   constructor() {}
   ngOnInit(): void {
     throw new Error('Method not implemented.');
+    this.loadTasksFromLocalStorage(); 
   }
+
+  //load tasks from local storage function
+  loadTasksFromLocalStorage() {
+    //saved tasks = get 'tasks' from localstorage.getItem('tasks')
+    const savedTasks = localStorage.getItem('tasks');
+    //if there are saved tasks in the local storage, fetch them and PARSE the data (Make it readable for user)
+    if (savedTasks) {
+      this.taskArray = JSON.parse(savedTasks);
+    }
+  }
+
+  // save tasks to local storage, STRINGIFY the data, making it readable by the computer
+  saveTasksToLocalStorage() {
+    localStorage.setItem('tasks', JSON.stringify(this.taskArray));
+  }
+
   onSubmit(form: NgForm) {
     // if task is in editing mode at a certain index point, and the value is not empty
     if (this.isEditing && this.editIndex !== null) {
@@ -33,6 +50,10 @@ export class NotesPageComponent implements OnInit {
         taskName: form.controls['task'].value,
       });
     }
+    //save to local storage on submit
+    this.saveTasksToLocalStorage();
+    //reset the form
+    form.reset();
   }
 
   //Toggle the editing mode of a specific task by index point
@@ -47,7 +68,7 @@ export class NotesPageComponent implements OnInit {
    //delete value by specific index point from the taskArray
    onDelete(index: number) {
     this.taskArray.splice(index, 1);
-   
+    this.saveTasksToLocalStorage();
   }
 
 }
