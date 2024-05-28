@@ -16,7 +16,7 @@ export class NotesPageComponent implements OnInit {
 
   // load Notes from local storage on initialization
   ngOnInit(): void {
-<<<<<<< HEAD
+
     throw new Error('Method not implemented.');
     this.loadTasksFromLocalStorage(); 
   }
@@ -24,14 +24,14 @@ export class NotesPageComponent implements OnInit {
   //load tasks from local storage function
   loadTasksFromLocalStorage() {
     //saved tasks = get 'tasks' from localstorage.getItem('tasks')
-=======
+
     this.loadTasksFromLocalStorage();
   }
 
   // load tasks from local storage function
   loadTasksFromLocalStorage() {
     // saved tasks = get 'tasks' from localstorage.getItem('tasks')
->>>>>>> b79f4bf13efbe07c1a1b7c8e5962c8585bc394ef
+
     const savedTasks = localStorage.getItem('tasks');
     //if there are saved tasks in the local storage, fetch them and PARSE the data (Make it readable for user)
     if (savedTasks) {
@@ -39,20 +39,19 @@ export class NotesPageComponent implements OnInit {
     }
   }
 
-<<<<<<< HEAD
+
   // save tasks to local storage, STRINGIFY the data, making it readable by the computer
   saveTasksToLocalStorage() {
     localStorage.setItem('tasks', JSON.stringify(this.taskArray));
   }
 
-=======
+
     // save tasks to local storage, STRINGIFY the data, making it readable by the computer
     saveTasksToLocalStorage() {
       localStorage.setItem('tasks', JSON.stringify(this.taskArray));
     }
 
-  
->>>>>>> b79f4bf13efbe07c1a1b7c8e5962c8585bc394ef
+
   onSubmit(form: NgForm) {
     // if task is in editing mode at a certain index point, and the value is not empty
     if (this.isEditing && this.editIndex !== null) {
@@ -70,11 +69,16 @@ export class NotesPageComponent implements OnInit {
         taskName: form.controls['task'].value,
       });
     }
-    //save to local storage on submit
+
+    this.saveTasksToLocalStorage();
+
+   //save to local storage on submit
     this.saveTasksToLocalStorage();
     //reset the form
+
     form.reset();
   }
+  
 
   
 
@@ -83,7 +87,7 @@ export class NotesPageComponent implements OnInit {
     this.isEditing = true;
     this.editIndex = index;
     this.editTaskName = this.taskArray[index].taskName;
-<<<<<<< HEAD
+
 
  
 }
@@ -92,8 +96,8 @@ export class NotesPageComponent implements OnInit {
    onDelete(index: number) {
     this.taskArray.splice(index, 1);
     this.saveTasksToLocalStorage();
-=======
->>>>>>> b79f4bf13efbe07c1a1b7c8e5962c8585bc394ef
+
+
   }
 
   
@@ -101,5 +105,6 @@ export class NotesPageComponent implements OnInit {
   //delete value by specific index point from the taskArray
   onDelete(index: number) {
     this.taskArray.splice(index, 1);
+    this.saveTasksToLocalStorage();
   }
 }
