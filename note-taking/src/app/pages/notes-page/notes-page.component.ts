@@ -7,7 +7,7 @@ import { NgForm } from '@angular/forms';
   styleUrl: './notes-page.component.css',
 })
 export class NotesPageComponent implements OnInit {
-  taskArray = [{ taskName: 'Brush teeth' }];
+  taskArray = [{ taskName: '' }];
   isEditing = false;
   editIndex: number | null = null;
   editTaskName = '';
@@ -16,15 +16,7 @@ export class NotesPageComponent implements OnInit {
 
   // load Notes from local storage on initialization
   ngOnInit(): void {
-
     throw new Error('Method not implemented.');
-    this.loadTasksFromLocalStorage(); 
-  }
-
-  //load tasks from local storage function
-  loadTasksFromLocalStorage() {
-    //saved tasks = get 'tasks' from localstorage.getItem('tasks')
-
     this.loadTasksFromLocalStorage();
   }
 
@@ -39,18 +31,10 @@ export class NotesPageComponent implements OnInit {
     }
   }
 
-
   // save tasks to local storage, STRINGIFY the data, making it readable by the computer
   saveTasksToLocalStorage() {
     localStorage.setItem('tasks', JSON.stringify(this.taskArray));
   }
-
-
-    // save tasks to local storage, STRINGIFY the data, making it readable by the computer
-    saveTasksToLocalStorage() {
-      localStorage.setItem('tasks', JSON.stringify(this.taskArray));
-    }
-
 
   onSubmit(form: NgForm) {
     // if task is in editing mode at a certain index point, and the value is not empty
@@ -72,35 +56,19 @@ export class NotesPageComponent implements OnInit {
 
     this.saveTasksToLocalStorage();
 
-   //save to local storage on submit
+    //save to local storage on submit
     this.saveTasksToLocalStorage();
     //reset the form
 
     form.reset();
   }
-  
-
-  
 
   //Toggle the editing mode of a specific task by index point
   toggleEdit(index: number) {
     this.isEditing = true;
     this.editIndex = index;
     this.editTaskName = this.taskArray[index].taskName;
-
-
- 
-}
-
-   //delete value by specific index point from the taskArray
-   onDelete(index: number) {
-    this.taskArray.splice(index, 1);
-    this.saveTasksToLocalStorage();
-
-
   }
-
-  
 
   //delete value by specific index point from the taskArray
   onDelete(index: number) {
