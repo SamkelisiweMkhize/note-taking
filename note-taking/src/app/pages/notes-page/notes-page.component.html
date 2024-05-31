@@ -3,14 +3,14 @@
     </div>
     
     <div class="bigBox">
-      <div class="display">
+      <div class="display1">
       <form #taskForm="ngForm" (submit)="onSubmit(taskForm)">
         <input type="text" name="task" ngModel required>
         <button type="submit">Add Note</button>
       </form>
     </div>
     
-    <div class="display">
+    <div class="display2">
       <li *ngFor="let task of taskArray; let i = index">
         
         <span>{{ task.taskName }}</span>
